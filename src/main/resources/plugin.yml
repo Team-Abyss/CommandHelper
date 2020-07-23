@@ -1,0 +1,4 @@
+name: CommandHelper
+version: ${project.version}
+main: com.jp.ichi.spigot.commandhelper.CommandHelper
+api-version: 1.13
