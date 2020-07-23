@@ -85,6 +85,10 @@ public interface CommandArgument<T> {
         return new ArgumentExecute(it -> command.run(it.getSource().getBukkitSender(),it));
     }
 
+    static CommandArgument<String> Command(Command<CommandListenerWrapper> command) {
+        return new ArgumentExecute(command);
+    }
+
     String getName();
 
     ArgumentBuilder<CommandListenerWrapper, ?> getArgumentBuilder();
