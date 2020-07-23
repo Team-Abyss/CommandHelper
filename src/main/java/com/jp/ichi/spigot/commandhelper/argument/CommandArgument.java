@@ -1,5 +1,6 @@
 package com.jp.ichi.spigot.commandhelper.argument;
 
+import com.jp.ichi.spigot.commandhelper.CommandRunner;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.builder.ArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
@@ -80,8 +81,8 @@ public interface CommandArgument<T> {
         return new ArgumentBlockLocation(name, arguments);
     }
 
-    static CommandArgument<String> Command(Command<CommandListenerWrapper> command) {
-        return new ArgumentExecute(command);
+    static CommandArgument<String> Command(CommandRunner command) {
+        return new ArgumentExecute(it -> command.run(it.getSource().getBukkitSender(),it));
     }
 
     String getName();
