@@ -8,15 +8,15 @@ import net.minecraft.server.v1_13_R2.CommandListenerWrapper;
 public class ArgumentFloat extends SimpleCommandArgument<Float> {
 
     public ArgumentFloat(String name, CommandArgument<?>... arguments) {
-        super(name, RequiredArgumentBuilder.argument(name, FloatArgumentType.floatArg()), arguments);
+        super(name,()-> RequiredArgumentBuilder.argument(name, FloatArgumentType.floatArg()), arguments);
     }
 
     public ArgumentFloat(String name, int min, CommandArgument<?>... arguments) {
-        super(name, RequiredArgumentBuilder.argument(name, FloatArgumentType.floatArg(min)), arguments);
+        super(name,()-> RequiredArgumentBuilder.argument(name, FloatArgumentType.floatArg(min)), arguments);
     }
 
     public ArgumentFloat(String name, int min, int max, CommandArgument<?>... arguments) {
-        super(name, RequiredArgumentBuilder.argument(name, FloatArgumentType.floatArg(min, max)), arguments);
+        super(name,()-> RequiredArgumentBuilder.argument(name, FloatArgumentType.floatArg(min, max)), arguments);
     }
 
     @Override

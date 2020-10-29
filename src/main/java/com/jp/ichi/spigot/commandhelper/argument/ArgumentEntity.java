@@ -7,18 +7,19 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.server.v1_13_R2.CommandListenerWrapper;
 import net.minecraft.server.v1_13_R2.Entity;
 
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.List;
 
-public class ArgumentEntity extends SimpleCommandArgument<Collection<? extends Entity>> {
+public class ArgumentEntity extends SimpleCommandArgument<List<? extends Entity>> {
 
     public ArgumentEntity(String name, CommandArgument<?>... arguments) {
-        super(name, RequiredArgumentBuilder.argument(name, net.minecraft.server.v1_13_R2.ArgumentEntity.b()), arguments);
+        super(name,()-> RequiredArgumentBuilder.argument(name, net.minecraft.server.v1_13_R2.ArgumentEntity.b()), arguments);
     }
 
     @Override
-    public Collection<? extends Entity> getValue(CommandContext<CommandListenerWrapper> commandContext) {
+    public List<? extends Entity> getValue(CommandContext<CommandListenerWrapper> commandContext) {
         try {
-            return net.minecraft.server.v1_13_R2.ArgumentEntity.b(commandContext, getName());
+            return new ArrayList<>(net.minecraft.server.v1_13_R2.ArgumentEntity.b(commandContext, getName()));
         } catch (CommandSyntaxException exception) {
             return null;
         }

@@ -8,15 +8,15 @@ import net.minecraft.server.v1_13_R2.CommandListenerWrapper;
 public class ArgumentInteger extends SimpleCommandArgument<Integer> {
 
     public ArgumentInteger(String name, CommandArgument<?>... arguments) {
-        super(name, RequiredArgumentBuilder.argument(name, IntegerArgumentType.integer()), arguments);
+        super(name,()-> RequiredArgumentBuilder.argument(name, IntegerArgumentType.integer()), arguments);
     }
 
     public ArgumentInteger(String name, int min, CommandArgument<?>... arguments) {
-        super(name, RequiredArgumentBuilder.argument(name, IntegerArgumentType.integer(min)), arguments);
+        super(name,()-> RequiredArgumentBuilder.argument(name, IntegerArgumentType.integer(min)), arguments);
     }
 
     public ArgumentInteger(String name, int min, int max, CommandArgument<?>... arguments) {
-        super(name, RequiredArgumentBuilder.argument(name, IntegerArgumentType.integer(min, max)), arguments);
+        super(name,()-> RequiredArgumentBuilder.argument(name, IntegerArgumentType.integer(min, max)), arguments);
     }
 
     @Override

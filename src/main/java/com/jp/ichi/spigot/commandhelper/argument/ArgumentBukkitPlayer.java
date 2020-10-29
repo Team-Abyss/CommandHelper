@@ -7,21 +7,22 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.server.v1_13_R2.ArgumentEntity;
 import net.minecraft.server.v1_13_R2.CommandListenerWrapper;
 import net.minecraft.server.v1_13_R2.EntityPlayer;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class ArgumentPlayer extends SimpleCommandArgument<List<EntityPlayer>> {
+public class ArgumentBukkitPlayer extends SimpleCommandArgument<List<Player>> {
 
-    public ArgumentPlayer(String name, CommandArgument<?>... arguments) {
+    public ArgumentBukkitPlayer(String name, CommandArgument<?>... arguments) {
         super(name,()-> RequiredArgumentBuilder.argument(name, (ArgumentType<?>) ArgumentEntity.d()), arguments);
     }
 
     @Override
-    public List<EntityPlayer> getValue(CommandContext<CommandListenerWrapper> commandContext) {
+    public List<Player> getValue(CommandContext<CommandListenerWrapper> commandContext) {
         try {
-            return new ArrayList<>(ArgumentEntity.f(commandContext, getName()));
+            return ArgumentEntity.f(commandContext, getName()).stream().map(EntityPlayer::getBukkitEntity).collect(Collectors.toList());
         } catch (CommandSyntaxException exception) {
             return null;
         }
