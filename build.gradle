@@ -3,12 +3,20 @@ import org.apache.tools.ant.filters.ReplaceTokens
 plugins {
     id 'java'
     id 'java-library'
+    id 'maven-publish'
 }
+
+def mainClass = 'com.jp.ichi.spigot.commandhelper.CommandHelper'
 
 group = 'com.jp.ichi.spigot'
 version = '1.0-SNAPSHOT'
-def mainClass = 'com.jp.ichi.spigot.commandhelper.CommandHelper'
+
 tasks.withType(AbstractCompile)*.options*.encoding = tasks.withType(GroovyCompile)*.groovyOptions*.encoding = 'UTF-8'
+
+task sourceJar(type: Jar) {
+    classifier 'sources'
+    from sourceSets.main.allJava
+}
 
 repositories {
     mavenCentral()
@@ -30,3 +38,20 @@ processResources {
         filter ReplaceTokens, tokens: [version: version , mainClass: mainClass , name: projectDir.name]
     }
 }
+
+
+publishing {
+    repositories {
+        maven {
+            url = "$projectDir/repo"
+        }
+    }
+    publications {
+        maven(MavenPublication) {
+            from components.java
+            artifact tasks.sourceJar
+        }
+    }
+}
+
+
