@@ -1,9 +1,20 @@
 import org.apache.tools.ant.filters.ReplaceTokens
 
+buildscript {
+    repositories {
+        jcenter()
+        maven { url 'http://kamatama41.github.com/maven-repository/repository' }
+    }
+    dependencies {
+        classpath("com.github.kamatama41:gradle-git-release-plugin:0.3.0")
+    }
+}
+
 plugins {
     id 'java'
     id 'java-library'
     id 'maven-publish'
+    id 'com.github.kamatama41.git-release' version '0.3.0'
 }
 
 def mainClass = 'com.jp.ichi.spigot.commandhelper.CommandHelper'
@@ -13,9 +24,10 @@ version = '1.0-SNAPSHOT'
 
 tasks.withType(AbstractCompile)*.options*.encoding = tasks.withType(GroovyCompile)*.groovyOptions*.encoding = 'UTF-8'
 
-task sourceJar(type: Jar) {
-    classifier 'sources'
-    from sourceSets.main.allJava
+gitRelease {
+    groupId = group
+    artifactId = rootProject.name
+    repoUri = 'git@github.com:Team-Abyss/maven.git'
 }
 
 repositories {
@@ -39,19 +51,5 @@ processResources {
     }
 }
 
-
-publishing {
-    repositories {
-        maven {
-            url = "$projectDir/repo"
-        }
-    }
-    publications {
-        maven(MavenPublication) {
-            from components.java
-            artifact tasks.sourceJar
-        }
-    }
-}
 
 
