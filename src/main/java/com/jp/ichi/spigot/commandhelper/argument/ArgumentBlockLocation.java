@@ -1,7 +1,5 @@
 package com.jp.ichi.spigot.commandhelper.argument;
 
-import com.mojang.brigadier.arguments.ArgumentType;
-import com.mojang.brigadier.builder.ArgumentBuilder;
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
@@ -13,7 +11,7 @@ import org.bukkit.Location;
 
 public class ArgumentBlockLocation extends SimpleCommandArgument<Location> {
     public ArgumentBlockLocation(String name, CommandArgument<?>... arguments) {
-        super(name, RequiredArgumentBuilder.argument(name,ArgumentPosition.a()), arguments);
+        super(name,()-> RequiredArgumentBuilder.argument(name,ArgumentPosition.a()), arguments);
     }
 
     @Override

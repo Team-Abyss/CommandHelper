@@ -8,7 +8,7 @@ import net.minecraft.server.v1_13_R2.CommandListenerWrapper;
 public class ArgumentString extends SimpleCommandArgument<String> {
 
     public ArgumentString(String name, CommandArgument<?>... arguments) {
-        super(name, RequiredArgumentBuilder.argument(name, StringArgumentType.string()), arguments);
+        super(name,()-> RequiredArgumentBuilder.argument(name, StringArgumentType.string()), arguments);
     }
 
     @Override

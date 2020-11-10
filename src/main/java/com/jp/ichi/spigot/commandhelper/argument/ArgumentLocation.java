@@ -11,7 +11,7 @@ import org.bukkit.Location;
 
 public class ArgumentLocation extends SimpleCommandArgument<Location> {
     public ArgumentLocation(String name, CommandArgument<?>... arguments) {
-        super(name, RequiredArgumentBuilder.argument(name, ArgumentVec3.a()), arguments);
+        super(name,()-> RequiredArgumentBuilder.argument(name, ArgumentVec3.a()), arguments);
     }
 
     @Override

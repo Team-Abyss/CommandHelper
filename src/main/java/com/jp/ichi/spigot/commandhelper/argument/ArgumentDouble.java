@@ -8,15 +8,15 @@ import net.minecraft.server.v1_13_R2.CommandListenerWrapper;
 public class ArgumentDouble extends SimpleCommandArgument<Double> {
 
     public ArgumentDouble(String name, CommandArgument<?>... arguments) {
-        super(name, RequiredArgumentBuilder.argument(name, DoubleArgumentType.doubleArg()), arguments);
+        super(name,()-> RequiredArgumentBuilder.argument(name, DoubleArgumentType.doubleArg()), arguments);
     }
 
     public ArgumentDouble(String name, int min, CommandArgument<?>... arguments) {
-        super(name, RequiredArgumentBuilder.argument(name, DoubleArgumentType.doubleArg(min)), arguments);
+        super(name,()-> RequiredArgumentBuilder.argument(name, DoubleArgumentType.doubleArg(min)), arguments);
     }
 
     public ArgumentDouble(String name, int min, int max, CommandArgument<?>... arguments) {
-        super(name, RequiredArgumentBuilder.argument(name, DoubleArgumentType.doubleArg(min, max)), arguments);
+        super(name,()-> RequiredArgumentBuilder.argument(name, DoubleArgumentType.doubleArg(min, max)), arguments);
     }
 
     @Override

@@ -5,15 +5,17 @@ import com.jp.ichi.spigot.commandhelper.argument.ArgumentStart;
 import org.bukkit.entity.Entity;
 
 import java.util.Collection;
+import java.util.List;
 
 public class ExampleCommand implements CommandNode {
     @Override
     public ArgumentStart getArgument() {
 
         CommandArgument<?> literal = CommandArgument.Literal("aaa");
-        CommandArgument<Collection<Entity>> entity = CommandArgument.BukkitEntity("target");
+        CommandArgument<List<Entity>> entity = CommandArgument.BukkitEntity("target");
         CommandArgument<?> distance = CommandArgument.Integer("distance");
-        CommandArgument<?> literal2 = CommandArgument.Literal("bbb");
+       // CommandArgument<?> literal2 = CommandArgument.Literal("bbb");
+        CommandArgument<?> literal2 = CommandArgument.Literal("ccc");
 
         return CommandArgument.Start("test")
                 .then(literal
@@ -35,6 +37,6 @@ public class ExampleCommand implements CommandNode {
                 .then(CommandArgument.Command(it -> {
                     System.out.println("test");
                     return 1;
-                }));
+                })).addAlias("tes").addAlias("te");
     }
 }
